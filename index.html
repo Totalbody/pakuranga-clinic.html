@@ -270,4 +270,157 @@
                 </div>
                 <div class="service-item">
                     <i class="fas fa-hands service-icon"></i>
-                    <h3
+                    <h3>Manual Therapy</h3>
+                    <p>Hands-on techniques to improve mobility, reduce pain, and restore function to your body.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-child service-icon"></i>
+                    <h3>Postural Correction</h3>
+                    <p>Customised programmes to improve your posture, prevent injuries, and alleviate chronic pain.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-seedling service-icon"></i>
+                    <h3>Acupuncture / Dry Needling</h3>
+                    <p>Effective techniques to alleviate pain, improve circulation, and promote natural healing.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-hospital-user service-icon"></i>
+                    <h3>Careway Pathway</h3>
+                    <p>ACC-funded programme for specific injuries, providing comprehensive care and support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="container">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="timothy-keung.jpg" alt="Timothy Keung">
+                    <h3 onclick="openPractitionerModal('timothy-keung')">Timothy Keung</h3>
+                </div>
+                <div class="team-member">
+                    <img src="dylan-connolly.jpg" alt="Dylan Connolly">
+                    <h3 onclick="openPractitionerModal('dylan-connolly')">Dylan Connolly</h3>
+                </div>
+                <div class="team-member">
+                    <img src="alistair-burgess.jpg" alt="Alistair Burgess">
+                    <h3 onclick="openPractitionerModal('alistair-burgess')">Alistair Burgess</h3>
+                </div>
+                <div class="team-member">
+                    <img src="jen-hong.jpg" alt="Jen Hong">
+                    <h3 onclick="openPractitionerModal('jen-hong')">Jen Hong</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="container">
+            <h2>Book an Appointment</h2>
+            <p>Ready to start your journey to better health? Book an appointment with us today!</p>
+            <a href="https://total-body-physio.au1.cliniko.com/bookings?business_id=90633" target="_blank" class="button">Book Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Total Body Physio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="practitionerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="practitionerProfile" class="practitioner-profile"></div>
+            <iframe id="practitionerBooking" class="practitioner-booking"></iframe>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("practitionerModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        function openPractitionerModal(practitionerId) {
+            var profile = document.getElementById("practitionerProfile");
+            var booking = document.getElementById("practitionerBooking");
+
+            if (practitionerId === 'timothy-keung') {
+                profile.innerHTML = `
+                    <img src="timothy-keung.jpg" alt="Timothy Keung">
+                    <div class="practitioner-details">
+                        <h2>Timothy Keung</h2>
+                        <p>Timothy is a dedicated and enthusiastic physiotherapist who has been with Total Body Physio for over a year. Fluent in Mandarin, Cantonese, and English, Timothy is able to provide care to a diverse range of patients across our Auckland locations.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Rehabilitation</li>
+                            <li>Manual Therapy</li>
+                            <li>Acupuncture (in training)</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332&embedded=true';
+            } else if (practitionerId === 'dylan-connolly') {
+                profile.innerHTML = `
+                    <img src="dylan-connolly.jpg" alt="Dylan Connolly">
+                    <div class="practitioner-details">
+                        <h2>Dylan Connolly</h2>
+                        <p>Dylan is a friendly and motivated physiotherapist, originally from Ireland. He has experience in sports physiotherapy, particularly in football, and plays at a high level in New Zealand.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Injuries</li>
+                            <li>Lower Back Pain</li>
+                            <li>Shoulder Pain</li>
+                            <li>Post-operative Rehab</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true';
+            } else if (practitionerId === 'alistair-burgess') {
+                profile.innerHTML = `
+                    <img src="alistair-burgess.jpg" alt="Alistair Burgess">
+                    <div class="practitioner-details">
+                        <h2>Alistair Burgess</h2>
+                        <p>Alistair is a highly experienced physiotherapist with a passion for manual therapy and sports rehabilitation. He has been a part of the Total Body Physio team for several years, bringing a wealth of knowledge and expertise to his practice.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Manual Therapy</li>
+                            <li>Sports Injuries</li>
+                            <li>Chronic Pain Management</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=986214265748&embedded=true';
+            } else if (practitionerId === 'jen-hong') {
+                profile.innerHTML = `
+                    <img src="jen-hong.jpg" alt="Jen Hong">
+                    <div class="practitioner-details">
+                        <h2>Jen Hong</h2>
+                        <p>Jen is a skilled physiotherapist specializing in post-operative rehabilitation and women's health. She has been with Total Body Physio for over three years and is known for her compassionate and thorough approach to patient care.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Post-operative Rehab</li>
+                            <li>Women's Health</li>
+                            <li>Pelvic Floor Physiotherapy</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=734861219871&embedded=true';
+            }
+
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
