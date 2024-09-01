@@ -128,13 +128,10 @@
         }
         .team-member h3 {
             margin-bottom: 1rem;
-        }
-        .team-member a {
-            color: #036F39;
-            text-decoration: none;
             cursor: pointer;
+            color: #036F39;
         }
-        .team-member a:hover {
+        .team-member h3:hover {
             text-decoration: underline;
         }
         .button {
@@ -148,6 +145,59 @@
             margin-top: auto;
             border: none;
             cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .practitioner-profile {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .practitioner-profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .practitioner-details {
+            flex: 1;
+        }
+        .practitioner-booking {
+            width: 100%;
+            height: 600px;
+            border: none;
         }
     </style>
 </head>
@@ -242,19 +292,19 @@
             <div class="team-grid">
                 <div class="team-member">
                     <img src="timothy-keung.jpg" alt="Timothy Keung">
-                    <h3><a href="javascript:void(0);" onclick="openPractitionerWindow('timothy-keung')">Timothy Keung</a></h3>
+                    <h3 onclick="openPractitionerModal('timothy-keung')">Timothy Keung</h3>
                 </div>
                 <div class="team-member">
                     <img src="dylan-connolly.jpg" alt="Dylan Connolly">
-                    <h3><a href="javascript:void(0);" onclick="openPractitionerWindow('dylan-connolly')">Dylan Connolly</a></h3>
+                    <h3 onclick="openPractitionerModal('dylan-connolly')">Dylan Connolly</h3>
                 </div>
                 <div class="team-member">
                     <img src="alistair-burgess.jpg" alt="Alistair Burgess">
-                    <h3><a href="javascript:void(0);" onclick="openPractitionerWindow('alistair-burgess')">Alistair Burgess</a></h3>
+                    <h3 onclick="openPractitionerModal('alistair-burgess')">Alistair Burgess</h3>
                 </div>
                 <div class="team-member">
                     <img src="jen-hong.jpg" alt="Jen Hong">
-                    <h3><a href="javascript:void(0);" onclick="openPractitionerWindow('jen-hong')">Jen Hong</a></h3>
+                    <h3 onclick="openPractitionerModal('jen-hong')">Jen Hong</h3>
                 </div>
             </div>
         </div>
@@ -274,31 +324,56 @@
         </div>
     </footer>
 
+    <div id="practitionerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="practitionerProfile" class="practitioner-profile"></div>
+            <iframe id="practitionerBooking" class="practitioner-booking"></iframe>
+        </div>
+    </div>
+
     <script>
-    function openPractitionerWindow(practitionerId) {
-        var url;
-        var windowName = 'PractitionerDetails';
-        var windowFeatures = 'width=800,height=600,resizable=yes,scrollbars=yes,status=yes';
+        var modal = document.getElementById("practitionerModal");
+        var span = document.getElementsByClassName("close")[0];
 
-        switch(practitionerId) {
-            case 'timothy-keung':
-                url = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332';
-                break;
-            case 'dylan-connolly':
-                url = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342';
-                break;
-            case 'alistair-burgess':
-                url = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1274037115297990613';
-                break;
-            case 'jen-hong':
-                url = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=151553';
-                break;
-            default:
-                url = 'https://total-body-physio.au1.cliniko.com/bookings';
-        }
+        function openPractitionerModal(practitionerId) {
+            var profile = document.getElementById("practitionerProfile");
+            var booking = document.getElementById("practitionerBooking");
 
-        window.open(url, windowName, windowFeatures);
-    }
-    </script>
-</body>
-</html>
+            if (practitionerId === 'timothy-keung') {
+                profile.innerHTML = `
+                    <img src="timothy-keung.jpg" alt="Timothy Keung">
+                    <div class="practitioner-details">
+                        <h2>Timothy Keung</h2>
+                        <p>Timothy is a dedicated and enthusiastic physiotherapist who has been with Total Body Physio for over a year. Fluent in Mandarin, Cantonese, and English, Timothy is able to provide care to a diverse range of patients across our Auckland locations.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Rehabilitation</li>
+                            <li>Manual Therapy</li>
+                            <li>Acupuncture (in training)</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332&embedded=true';
+            } else if (practitionerId === 'dylan-connolly') {
+                profile.innerHTML = `
+                    <img src="dylan-connolly.jpg" alt="Dylan Connolly">
+                    <div class="practitioner-details">
+                        <h2>Dylan Connolly</h2>
+                        <p>Dylan is a friendly and motivated physiotherapist, originally from Ireland. He has experience in sports physiotherapy, particularly in football, and plays at a high level in New Zealand.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Injuries</li>
+                            <li>Lower Back Pain</li>
+                            <li>Shoulder Pain</li>
+                            <li>Post-operative Rehab</li>
+                        </ul>
+                    </div>
+                `;
+                booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true';
+            } else if (practitionerId === 'alistair-burgess') {
+                profile.innerHTML = `
+                    <img src="alistair-burgess.jpg" alt="Alistair Burgess">
+                    <div class="practitioner-details">
+                        <h2>Alistair Burgess</h2>
+                        <p>Alistair is an experienced physiotherapist with over 8 years in
