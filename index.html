@@ -149,7 +149,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
@@ -162,9 +162,11 @@
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 90%;
             max-width: 800px;
             border-radius: 10px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .close {
             color: #aaa;
@@ -193,6 +195,7 @@
         }
         .practitioner-details {
             flex: 1;
+            min-width: 300px;
         }
         .practitioner-booking {
             width: 100%;
@@ -375,5 +378,4 @@
                 profile.innerHTML = `
                     <img src="alistair-burgess.jpg" alt="Alistair Burgess">
                     <div class="practitioner-details">
-                        <h2>Alistair Burgess</h2>
-                        <p>Alistair is an experienced physiotherapist with over 8 years in
+                        <h2>Alistair Burgess
