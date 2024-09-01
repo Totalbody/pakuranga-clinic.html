@@ -144,11 +144,11 @@
         }
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 800px;
             border-radius: 10px;
         }
         .close {
@@ -162,6 +162,21 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+        .practitioner-profile {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        .practitioner-profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 2rem;
+        }
+        .practitioner-details {
+            flex: 1;
         }
     </style>
 </head>
@@ -295,7 +310,7 @@
     <div id="practitionerModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="practitionerDetails"></div>
+            <div id="practitionerProfile" class="practitioner-profile"></div>
             <div id="practitionerBooking"></div>
         </div>
     </div>
@@ -303,50 +318,47 @@
     <script>
         function openPractitionerModal(practitionerId) {
             var modal = document.getElementById("practitionerModal");
-            var details = document.getElementById("practitionerDetails");
+            var profile = document.getElementById("practitionerProfile");
             var booking = document.getElementById("practitionerBooking");
 
             // Set practitioner details based on ID
             if (practitionerId === 'timothy-keung') {
-                details.innerHTML = `
-                    <h2>Timothy Keung</h2>
-                    <p>Timothy is a dedicated and enthusiastic physiotherapist who has been with Total Body Physio for over a year. Fluent in Mandarin, Cantonese, and English, Timothy is able to provide care to a diverse range of patients across our Auckland locations.</p>
-                    <h3>Specialties:</h3>
-                    <ul>
-                        <li>Sports Rehabilitation</li>
-                        <li>Manual Therapy</li>
-                        <li>Acupuncture (in training)</li>
-                    </ul>
+                profile.innerHTML = `
+                    <img src="timothy-keung.jpg" alt="Timothy Keung">
+                    <div class="practitioner-details">
+                        <h2>Timothy Keung</h2>
+                        <p>Timothy is a dedicated and enthusiastic physiotherapist who has been with Total Body Physio for over a year. Fluent in Mandarin, Cantonese, and English, Timothy is able to provide care to a diverse range of patients across our Auckland locations.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Rehabilitation</li>
+                            <li>Manual Therapy</li>
+                            <li>Acupuncture (in training)</li>
+                        </ul>
+                    </div>
                 `;
                 booking.innerHTML = `
                     <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000'></iframe>
                 `;
             } else if (practitionerId === 'dylan-connolly') {
-                details.innerHTML = `
-                    <h2>Dylan Connolly</h2>
-                    <p>Dylan is a friendly and motivated physiotherapist, originally from Ireland. He has experience in sports physiotherapy, particularly in football, and plays at a high level in New Zealand.</p>
-                    <h3>Specialties:</h3>
-                    <ul>
-                        <li>Sports Injuries</li>
-                        <li>Lower Back Pain</li>
-                        <li>Shoulder Pain</li>
-                        <li>Post-operative Rehab</li>
-                    </ul>
+                profile.innerHTML = `
+                    <img src="dylan-connolly.jpg" alt="Dylan Connolly">
+                    <div class="practitioner-details">
+                        <h2>Dylan Connolly</h2>
+                        <p>Dylan is a friendly and motivated physiotherapist, originally from Ireland. He has experience in sports physiotherapy, particularly in football, and plays at a high level in New Zealand.</p>
+                        <h3>Specialties:</h3>
+                        <ul>
+                            <li>Sports Injuries</li>
+                            <li>Lower Back Pain</li>
+                            <li>Shoulder Pain</li>
+                            <li>Post-operative Rehab</li>
+                        </ul>
+                    </div>
                 `;
                 booking.innerHTML = `
                     <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000'></iframe>
                 `;
             } else if (practitionerId === 'alistair-burgess') {
-                details.innerHTML = `
-                    <h2>Alistair Burgess</h2>
-                    <p>Alistair is an experienced physiotherapist with over 8 years in private practice. He has a comprehensive understanding of clinical assessment and treatment, specializing in Strength Training, Movement Assessment, and Shoulder and Core Rehabilitation.</p>
-                    <h3>Specialties:</h3>
-                    <ul>
-                        <li>Strength Training</li>
-                        <li>Movement Assessment</li>
-                        <li>Shoulder Rehabilitation</li>
-                        <li>Core Rehabilitation</li>
-                    </ul>
-                `;
-                booking.innerHTML = `
-                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1274037115297990613&embedded=true' frameborder='0' scrolling='auto' width
+                profile.innerHTML = `
+                    <img src="alistair-burgess.jpg" alt="Alistair Burgess">
+                    <div class="practitioner-details">
+                        <h2>Alistair Burg
