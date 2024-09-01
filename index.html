@@ -126,6 +126,9 @@
             object-fit: cover;
             margin: 0 auto 1rem;
         }
+        .team-member h3 {
+            margin-bottom: 1rem;
+        }
         .button {
             display: inline-block;
             background: #036F39;
@@ -134,6 +137,9 @@
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.1rem;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
         }
         .modal {
             display: none;
@@ -281,22 +287,22 @@
                 <div class="team-member">
                     <img src="timothy-keung.jpg" alt="Timothy Keung">
                     <h3>Timothy Keung</h3>
-                    <a href="#" onclick="openPractitionerModal('timothy-keung')" class="button">Learn More</a>
+                    <button onclick="openPractitionerModal('timothy-keung')" class="button">Learn More</button>
                 </div>
                 <div class="team-member">
                     <img src="dylan-connolly.jpg" alt="Dylan Connolly">
                     <h3>Dylan Connolly</h3>
-                    <a href="#" onclick="openPractitionerModal('dylan-connolly')" class="button">Learn More</a>
+                    <button onclick="openPractitionerModal('dylan-connolly')" class="button">Learn More</button>
                 </div>
                 <div class="team-member">
                     <img src="alistair-burgess.jpg" alt="Alistair Burgess">
                     <h3>Alistair Burgess</h3>
-                    <a href="#" onclick="openPractitionerModal('alistair-burgess')" class="button">Learn More</a>
+                    <button onclick="openPractitionerModal('alistair-burgess')" class="button">Learn More</button>
                 </div>
                 <div class="team-member">
                     <img src="jen-hong.jpg" alt="Jen Hong">
                     <h3>Jen Hong</h3>
-                    <a href="#" onclick="openPractitionerModal('jen-hong')" class="button">Learn More</a>
+                    <button onclick="openPractitionerModal('jen-hong')" class="button">Learn More</button>
                 </div>
             </div>
         </div>
@@ -364,4 +370,4 @@
                     </div>
                 `;
                 booking.innerHTML = `
-                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true' frameborder='0' scrolling='auto' width='
+                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com
