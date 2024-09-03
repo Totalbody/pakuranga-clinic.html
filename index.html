@@ -58,9 +58,11 @@
         h2 {
             font-size: 2.2rem;
             color: #036F39;
+            margin-bottom: 1rem;
         }
         h3 {
             font-size: 1.8rem;
+            margin-bottom: 1rem;
         }
         .highlight, header .current a {
             color: #8DC63F;
@@ -106,6 +108,7 @@
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -128,14 +131,9 @@
         }
         .team-member h3 {
             margin-top: 0;
-            margin-bottom: 1rem;
-            cursor: pointer;
             color: #036F39;
             font-size: 1.5rem;
             line-height: 1.2;
-        }
-        .team-member h3:hover {
-            text-decoration: underline;
         }
         .button {
             display: inline-block;
@@ -205,6 +203,30 @@
             height: 600px;
             border: none;
         }
+        /* New styles for opening hours and phone number */
+        #about .info h3 {
+            margin-bottom: 0.5rem;
+        }
+        #about .info p {
+            font-size: 1.1rem;
+        }
+        #about .info p strong {
+            font-size: 1.2rem;
+        }
+        #services .service-item {
+            cursor: pointer;
+        }
+        #team .team-member h3 {
+            text-align: center;
+            font-size: 1.6rem;
+        }
+        /* Blank space under header */
+        #header-image {
+            width: 100%;
+            height: 200px;
+            background: url('header-image-placeholder.jpg') no-repeat center center;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -225,6 +247,8 @@
         </div>
     </header>
 
+    <div id="header-image"></div>
+
     <section id="showcase">
         <div class="container">
             <h1>Welcome to Total Body Physio Pakuranga</h1>
@@ -239,13 +263,13 @@
                 <div>
                     <p>Our Pakuranga clinic, established in 2002, has been serving the local community with top-notch physiotherapy services. Located conveniently at 1 Sir Lloyd Drive, Pakuranga Heights, Auckland, we offer a wide range of treatments in a modern, well-equipped facility.</p>
                     <h3>Contact Information:</h3>
-                    <p>Phone: 09 535 1932</p>
+                    <p><strong>Phone:</strong> <strong>09 535 1932</strong></p>
                     <p>Email: pakuranga@totalbodyphysio.co.nz</p>
                     <p>Address: 1 Sir Lloyd Drive, Pakuranga Heights, Auckland</p>
                     <h3>Opening Hours:</h3>
-                    <p>Monday - Friday: 7am - 7pm</p>
-                    <p>Saturday: 8am - 1pm</p>
-                    <p>Sunday: Closed</p>
+                    <p><strong>Monday - Friday:</strong> 7am - 7pm</p>
+                    <p><strong>Saturday:</strong> 8am - 1pm</p>
+                    <p><strong>Sunday:</strong> Closed</p>
                 </div>
                 <div>
                     <iframe
@@ -263,27 +287,27 @@
         <div class="container">
             <h2>Our Services</h2>
             <div class="services-grid">
-                <div class="service-item">
+                <div class="service-item" ondblclick="openServiceModal('sports-injury')">
                     <i class="fas fa-running service-icon"></i>
                     <h3>Sports Injury Rehabilitation</h3>
                     <p>Specialised treatment for athletes of all levels, helping you return to your sport stronger than ever.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" ondblclick="openServiceModal('manual-therapy')">
                     <i class="fas fa-hands service-icon"></i>
                     <h3>Manual Therapy</h3>
                     <p>Hands-on techniques to improve mobility, reduce pain, and restore function to your body.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" ondblclick="openServiceModal('postural-correction')">
                     <i class="fas fa-child service-icon"></i>
                     <h3>Postural Correction</h3>
                     <p>Customised programmes to improve your posture, prevent injuries, and alleviate chronic pain.</p>
                 </div>
-                <div class="service-item">
-                    <i class="fas fa-seedling service-icon"></i>
+                <div class="service-item" ondblclick="openServiceModal('acupuncture')">
+                    <i class="fas fa-leaf service-icon"></i> <!-- Replace with new icon -->
                     <h3>Acupuncture / Dry Needling</h3>
                     <p>Effective techniques to alleviate pain, improve circulation, and promote natural healing.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" ondblclick="openServiceModal('careway-pathway')">
                     <i class="fas fa-hospital-user service-icon"></i>
                     <h3>Careway Pathway</h3>
                     <p>ACC-funded programme for specific injuries, providing comprehensive care and support.</p>
@@ -330,17 +354,45 @@
         </div>
     </footer>
 
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeServiceModal()">&times;</span>
+            <div id="serviceDetails"></div>
+        </div>
+    </div>
+
     <div id="practitionerModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closePractitionerModal()">&times;</span>
             <div id="practitionerProfile" class="practitioner-profile"></div>
             <iframe id="practitionerBooking" class="practitioner-booking"></iframe>
         </div>
     </div>
 
     <script>
-        var modal = document.getElementById("practitionerModal");
-        var span = document.getElementsByClassName("close")[0];
+        var serviceModal = document.getElementById("serviceModal");
+        var practitionerModal = document.getElementById("practitionerModal");
+
+        function openServiceModal(serviceId) {
+            var details = document.getElementById("serviceDetails");
+            if (serviceId === 'sports-injury') {
+                details.innerHTML = '<h2>Sports Injury Rehabilitation</h2><p>Specialised treatment for athletes of all levels, helping you return to your sport stronger than ever. Our team uses the latest techniques and technology to diagnose, treat, and prevent sports-related injuries.</p><img src="sports-injury.jpg" alt="Sports Injury Rehabilitation">';
+            } else if (serviceId === 'manual-therapy') {
+                details.innerHTML = '<h2>Manual Therapy</h2><p>Our hands-on techniques are designed to improve mobility, reduce pain, and restore function to your body. We tailor each session to your specific needs to ensure optimal recovery.</p><img src="manual-therapy.jpg" alt="Manual Therapy">';
+            } else if (serviceId === 'postural-correction') {
+                details.innerHTML = '<h2>Postural Correction</h2><p>We create customised programmes to improve your posture, prevent injuries, and alleviate chronic pain. Our approach is holistic, addressing both the symptoms and underlying causes of poor posture.</p><img src="postural-correction.jpg" alt="Postural Correction">';
+            } else if (serviceId === 'acupuncture') {
+                details.innerHTML = '<h2>Acupuncture / Dry Needling</h2><p>Effective techniques to alleviate pain, improve circulation, and promote natural healing. Our practitioners are highly skilled in these methods, ensuring safe and effective treatment.</p><img src="acupuncture.jpg" alt="Acupuncture">';
+            } else if (serviceId === 'careway-pathway') {
+                details.innerHTML = '<h2>Careway Pathway</h2><p>ACC-funded programme for specific injuries, providing comprehensive care and support. We guide you through your recovery with a structured and supportive approach.</p><img src="careway-pathway.jpg" alt="Careway Pathway">';
+            }
+
+            serviceModal.style.display = "block";
+        }
+
+        function closeServiceModal() {
+            serviceModal.style.display = "none";
+        }
 
         function openPractitionerModal(practitionerId) {
             var profile = document.getElementById("practitionerProfile");
@@ -409,16 +461,18 @@
                 booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=734861219871&embedded=true';
             }
 
-            modal.style.display = "block";
+            practitionerModal.style.display = "block";
         }
 
-        span.onclick = function() {
-            modal.style.display = "none";
+        function closePractitionerModal() {
+            practitionerModal.style.display = "none";
         }
 
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target == serviceModal) {
+                serviceModal.style.display = "none";
+            } else if (event.target == practitionerModal) {
+                practitionerModal.style.display = "none";
             }
         }
     </script>
