@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-NZ">
 <head>
     <meta charset="UTF-8">
@@ -58,11 +58,9 @@
         h2 {
             font-size: 2.2rem;
             color: #036F39;
-            margin-bottom: 1rem;
         }
         h3 {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
         }
         .highlight, header .current a {
             color: #8DC63F;
@@ -96,21 +94,24 @@
             min-width: 300px;
             padding: 1rem;
         }
-        .services-grid {
+        .services-grid, .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        .service-item {
+        .service-item, .team-member {
             background: #f4f4f4;
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
-            cursor: pointer;
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
-        .service-item:hover {
+        .service-item:hover, .team-member:hover {
             transform: translateY(-5px);
         }
         .service-icon {
@@ -118,52 +119,91 @@
             color: #036F39;
             margin-bottom: 1rem;
         }
-        .service-content {
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+        }
+        .team-member h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            color: #036F39;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+        .team-member h3:hover {
+            text-decoration: underline;
+        }
+        .button {
+            display: inline-block;
+            background: #036F39;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+        }
+        .modal {
             display: none;
-            margin-top: 1rem;
-            text-align: left;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
         }
-        .service-content img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 1rem;
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
-        /* Media queries for responsiveness */
-        @media (max-width: 768px) {
-            header {
-                padding: 0.5rem 0;
-            }
-            header #branding h1 {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-            header nav {
-                float: none;
-                text-align: center;
-                margin-top: 0;
-            }
-            header ul {
-                padding: 0;
-                list-style: none;
-            }
-            header li {
-                display: block;
-                padding: 10px 0;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            #showcase {
-                padding: 2rem 0;
-                min-height: 250px;
-            }
-            #showcase h1 {
-                font-size: 2.5rem;
-            }
-            #showcase p {
-                font-size: 1.2rem;
-            }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .practitioner-profile {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .practitioner-profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .practitioner-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        .practitioner-booking {
+            width: 100%;
+            height: 600px;
+            border: none;
         }
     </style>
 </head>
@@ -191,31 +231,6 @@
             <p>Expert physiotherapy care in the heart of Pakuranga</p>
         </div>
     </section>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Total Body Physio</span> Pakuranga</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li><a href="#booking">Booking</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div id="header-image"></div>
-
-    <section id="showcase">
-        <div class="container">
-            <h1>Welcome to Total Body Physio Pakuranga</h1>
-            <p>Expert physiotherapy care in the heart of Pakuranga</p>
-        </div>
-    </section>
 
     <section id="about">
         <div class="container">
@@ -224,13 +239,13 @@
                 <div>
                     <p>Our Pakuranga clinic, established in 2002, has been serving the local community with top-notch physiotherapy services. Located conveniently at 1 Sir Lloyd Drive, Pakuranga Heights, Auckland, we offer a wide range of treatments in a modern, well-equipped facility.</p>
                     <h3>Contact Information:</h3>
-                    <p><strong>Phone:</strong> <strong>09 535 1932</strong></p>
+                    <p>Phone: 09 535 1932</p>
                     <p>Email: pakuranga@totalbodyphysio.co.nz</p>
                     <p>Address: 1 Sir Lloyd Drive, Pakuranga Heights, Auckland</p>
                     <h3>Opening Hours:</h3>
-                    <p><strong>Monday - Friday:</strong> 7am - 7pm</p>
-                    <p><strong>Saturday:</strong> 8am - 1pm</p>
-                    <p><strong>Sunday:</strong> Closed</p>
+                    <p>Monday - Friday: 7am - 7pm</p>
+                    <p>Saturday: 8am - 1pm</p>
+                    <p>Sunday: Closed</p>
                 </div>
                 <div>
                     <iframe
@@ -248,63 +263,34 @@
         <div class="container">
             <h2>Our Services</h2>
             <div class="services-grid">
-                <div class="service-item" onclick="toggleServiceContent(this)">
+                <div class="service-item">
                     <i class="fas fa-running service-icon"></i>
                     <h3>Sports Injury Rehabilitation</h3>
-                    <div class="service-content">
-                        <p>Specialised treatment for athletes of all levels, helping you return to your sport stronger than ever.</p>
-                        <img src="sports-injury.jpg" alt="Sports Injury Rehabilitation">
-                    </div>
+                    <p>Specialised treatment for athletes of all levels, helping you return to your sport stronger than ever.</p>
                 </div>
-                <div class="service-item" onclick="toggleServiceContent(this)">
+                <div class="service-item">
                     <i class="fas fa-hands service-icon"></i>
                     <h3>Manual Therapy</h3>
-                    <div class="service-content">
-                        <p>Hands-on techniques to improve mobility, reduce pain, and restore function to your body.</p>
-                        <img src="manual-therapy.jpg" alt="Manual Therapy">
-                    </div>
+                    <p>Hands-on techniques to improve mobility, reduce pain, and restore function to your body.</p>
                 </div>
-                <div class="service-item" onclick="toggleServiceContent(this)">
+                <div class="service-item">
                     <i class="fas fa-child service-icon"></i>
                     <h3>Postural Correction</h3>
-                    <div class="service-content">
-                        <p>Customised programmes to improve your posture, prevent injuries, and alleviate chronic pain.</p>
-                        <img src="postural-correction.jpg" alt="Postural Correction">
-                    </div>
+                    <p>Customised programmes to improve your posture, prevent injuries, and alleviate chronic pain.</p>
                 </div>
-                <div class="service-item" onclick="toggleServiceContent(this)">
-                    <i class="fas fa-leaf service-icon"></i> <!-- Replace with a new icon -->
+                <div class="service-item">
+                    <i class="fas fa-seedling service-icon"></i>
                     <h3>Acupuncture / Dry Needling</h3>
-                    <div class="service-content">
-                        <p>Effective techniques to alleviate pain, improve circulation, and promote natural healing.</p>
-                        <img src="acupuncture.jpg" alt="Acupuncture">
-                    </div>
+                    <p>Effective techniques to alleviate pain, improve circulation, and promote natural healing.</p>
                 </div>
-                <div class="service-item" onclick="toggleServiceContent(this)">
+                <div class="service-item">
                     <i class="fas fa-hospital-user service-icon"></i>
                     <h3>Careway Pathway</h3>
-                    <div class="service-content">
-                        <p>ACC-funded programme for specific injuries, providing comprehensive care and support.</p>
-                        <img src="careway-pathway.jpg" alt="Careway Pathway">
-                    </div>
+                    <p>ACC-funded programme for specific injuries, providing comprehensive care and support.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-        function toggleServiceContent(element) {
-            // Toggle the display of the service content
-            var content = element.querySelector('.service-content');
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-            } else {
-                content.style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html>
 
     <section id="team">
         <div class="container">
@@ -344,52 +330,24 @@
         </div>
     </footer>
 
-    <div id="serviceModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeServiceModal()">&times;</span>
-            <div id="serviceDetails"></div>
-        </div>
-    </div>
-
     <div id="practitionerModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closePractitionerModal()">&times;</span>
+            <span class="close">&times;</span>
             <div id="practitionerProfile" class="practitioner-profile"></div>
             <iframe id="practitionerBooking" class="practitioner-booking"></iframe>
         </div>
     </div>
 
     <script>
-        var serviceModal = document.getElementById("serviceModal");
-        var practitionerModal = document.getElementById("practitionerModal");
-
-        function openServiceModal(serviceId) {
-            var details = document.getElementById("serviceDetails");
-            if (serviceId === 'sports-injury') {
-                details.innerHTML = '<h2>Sports Injury Rehabilitation</h2><p>Specialised treatment for athletes of all levels, helping you return to your sport stronger than ever. Our team uses the latest techniques and technology to diagnose, treat, and prevent sports-related injuries.</p><img src="sports-injury.jpg" alt="Sports Injury Rehabilitation">';
-            } else if (serviceId === 'manual-therapy') {
-                details.innerHTML = '<h2>Manual Therapy</h2><p>Our hands-on techniques are designed to improve mobility, reduce pain, and restore function to your body. We tailor each session to your specific needs to ensure optimal recovery.</p><img src="manual-therapy.jpg" alt="Manual Therapy">';
-            } else if (serviceId === 'postural-correction') {
-                details.innerHTML = '<h2>Postural Correction</h2><p>We create customised programmes to improve your posture, prevent injuries, and alleviate chronic pain. Our approach is holistic, addressing both the symptoms and underlying causes of poor posture.</p><img src="postural-correction.jpg" alt="Postural Correction">';
-            } else if (serviceId === 'acupuncture') {
-                details.innerHTML = '<h2>Acupuncture / Dry Needling</h2><p>Effective techniques to alleviate pain, improve circulation, and promote natural healing. Our practitioners are highly skilled in these methods, ensuring safe and effective treatment.</p><img src="acupuncture.jpg" alt="Acupuncture">';
-            } else if (serviceId === 'careway-pathway') {
-                details.innerHTML = '<h2>Careway Pathway</h2><p>ACC-funded programme for specific injuries, providing comprehensive care and support. We guide you through your recovery with a structured and supportive approach.</p><img src="careway-pathway.jpg" alt="Careway Pathway">';
-            }
-
-            serviceModal.style.display = "block";
-        }
-
-        function closeServiceModal() {
-            serviceModal.style.display = "none";
-        }
+        var modal = document.getElementById("practitionerModal");
+        var span = document.getElementsByClassName("close")[0];
 
         function openPractitionerModal(practitionerId) {
             var profile = document.getElementById("practitionerProfile");
             var booking = document.getElementById("practitionerBooking");
 
             if (practitionerId === 'timothy-keung') {
-                profile.innerHTML = `
+                profile.innerHTML = 
                     <img src="timothy-keung.jpg" alt="Timothy Keung">
                     <div class="practitioner-details">
                         <h2>Timothy Keung</h2>
@@ -401,10 +359,10 @@
                             <li>Acupuncture (in training)</li>
                         </ul>
                     </div>
-                `;
+                ;
                 booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332&embedded=true';
             } else if (practitionerId === 'dylan-connolly') {
-                profile.innerHTML = `
+                profile.innerHTML = 
                     <img src="9E3EF904-2E7C-4E73-81C7-EABEE3CA66D2.jpeg" alt="Dylan Connolly">
                     <div class="practitioner-details">
                         <h2>Dylan Connolly</h2>
@@ -417,10 +375,10 @@
                             <li>Post-operative Rehab</li>
                         </ul>
                     </div>
-                `;
+                ;
                 booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true';
             } else if (practitionerId === 'alistair-burgess') {
-                profile.innerHTML = `
+                profile.innerHTML = 
                     <img src="4BA123CA-528B-492B-B238-2D84A5D9076F.jpeg" alt="Alistair Burgess">
                     <div class="practitioner-details">
                         <h2>Alistair Burgess</h2>
@@ -432,10 +390,10 @@
                             <li>Chronic Pain Management</li>
                         </ul>
                     </div>
-                `;
+                ;
                 booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=986214265748&embedded=true';
             } else if (practitionerId === 'jen-hong') {
-                profile.innerHTML = `
+                profile.innerHTML = 
                     <img src="jen-hong.jpg" alt="Jen Hong">
                     <div class="practitioner-details">
                         <h2>Jen Hong</h2>
@@ -447,22 +405,20 @@
                             <li>Acupuncture</li>
                         </ul>
                     </div>
-                `;
+                ;
                 booking.src = 'https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=734861219871&embedded=true';
             }
 
-            practitionerModal.style.display = "block";
+            modal.style.display = "block";
         }
 
-        function closePractitionerModal() {
-            practitionerModal.style.display = "none";
+        span.onclick = function() {
+            modal.style.display = "none";
         }
 
         window.onclick = function(event) {
-            if (event.target == serviceModal) {
-                serviceModal.style.display = "none";
-            } else if (event.target == practitionerModal) {
-                practitionerModal.style.display = "none";
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
         }
     </script>
