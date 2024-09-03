@@ -77,6 +77,16 @@
             text-align: center;
             width: 30%;
             padding: 10px;
+            margin: 1%;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #services .service:hover, #team .member:hover {
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
         }
         .button {
             height: 38px;
@@ -89,6 +99,37 @@
         #map {
             height: 400px;
             width: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -138,15 +179,15 @@
     <section id="services">
         <div class="container">
             <h2>Our Services</h2>
-            <div class="service">
+            <div class="service" onclick="openModal('sports-rehab')">
                 <h3>Sports Injury Rehabilitation</h3>
                 <img src="sports-icon.png" alt="Sports Injury Icon">
             </div>
-            <div class="service">
+            <div class="service" onclick="openModal('manual-therapy')">
                 <h3>Manual Therapy</h3>
                 <img src="manual-therapy-icon.png" alt="Manual Therapy Icon">
             </div>
-            <div class="service">
+            <div class="service" onclick="openModal('acupuncture')">
                 <h3>Acupuncture</h3>
                 <img src="acupuncture-icon.png" alt="Acupuncture Icon">
             </div>
@@ -156,24 +197,32 @@
     <section id="team">
         <div class="container">
             <h2>Our Team</h2>
-            <div class="member">
+            <div class="member" onclick="openModal('jen-hong')">
                 <img src="jen-hong.jpg" alt="Jen Hong">
                 <h3>Jen Hong</h3>
             </div>
-            <div class="member">
+            <div class="member" onclick="openModal('timothy-keung')">
                 <img src="timothy-keung.jpg" alt="Timothy Keung">
                 <h3>Timothy Keung</h3>
             </div>
-            <div class="member">
+            <div class="member" onclick="openModal('dylan-connolly')">
                 <img src="dylan-connolly.jpg" alt="Dylan Connolly">
                 <h3>Dylan Connolly</h3>
             </div>
-            <div class="member">
+            <div class="member" onclick="openModal('alistair-burgess')">
                 <img src="alistair-burgess.jpg" alt="Alistair Burgess">
                 <h3>Alistair Burgess</h3>
             </div>
         </div>
     </section>
+
+    <!-- Modal for services and team members -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
     <script>
         function initMap() {
@@ -187,12 +236,84 @@
                 map: map
             });
         }
+
+        // Function to open modal
+        function openModal(id) {
+            var modal = document.getElementById("myModal");
+            var modalContent = document.getElementById("modalContent");
+            modal.style.display = "block";
+
+            // Content for services
+            var servicesContent = {
+                'sports-rehab': `
+                    <h2>Sports Injury Rehabilitation</h2>
+                    <img src="sports-rehab-large.jpg" alt="Sports Rehabilitation" style="width:100%;max-width:400px;">
+                    <p>Our sports injury rehabilitation program is designed to help athletes of all levels recover from injuries and return to their sport stronger than ever. We use a combination of manual therapy, exercise prescription, and cutting-edge rehabilitation techniques.</p>
+                `,
+                'manual-therapy': `
+                    <h2>Manual Therapy</h2>
+                    <img src="manual-therapy-large.jpg" alt="Manual Therapy" style="width:100%;max-width:400px;">
+                    <p>Our manual therapy techniques include joint mobilization, soft tissue massage, and manipulation. These hands-on treatments are effective for improving mobility, reducing pain, and enhancing overall physical function.</p>
+                `,
+                'acupuncture': `
+                    <h2>Acupuncture</h2>
+                    <img src="acupuncture-large.jpg" alt="Acupuncture" style="width:100%;max-width:400px;">
+                    <p>Our physiotherapists are trained in acupuncture, offering this ancient technique as a complementary treatment. Acupuncture can help with pain management, improve circulation, and promote natural healing processes in the body.</p>
+                `
+            };
+
+            // Content for team members
+            var teamContent = {
+                'jen-hong': `
+                    <h2>Jen Hong</h2>
+                    <img src="jen-hong-large.jpg" alt="Jen Hong" style="width:100%;max-width:400px;">
+                    <p>Jen Hong is a senior physiotherapist with over 5 years of experience. She specializes in sports injuries, concussion management, and acupuncture.</p>
+                    <h3>Book an Appointment with Jen</h3>
+                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=151553&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000' style='pointer-events: auto;'></iframe>
+                `,
+                'timothy-keung': `
+                    <h2>Timothy Keung</h2>
+                    <img src="timothy-keung-large.jpg" alt="Timothy Keung" style="width:100%;max-width:400px;">
+                    <p>Timothy Keung is a dedicated physiotherapist fluent in Mandarin, Cantonese, and English. He is currently pursuing a postgraduate degree in acupuncture.</p>
+                    <h3>Book an Appointment with Timothy</h3>
+                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=172332&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000' style='pointer-events: auto;'></iframe>
+                `,
+                'dylan-connolly': `
+                    <h2>Dylan Connolly</h2>
+                    <img src="dylan-connolly-large.jpg" alt="Dylan Connolly" style="width:100%;max-width:400px;">
+                    <p>Dylan Connolly is a friendly and motivated physiotherapist from Ireland. He has particular interest in treating lower back pain, shoulder pain, and post-operative rehabilitation.</p>
+                    <h3>Book an Appointment with Dylan</h3>
+                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1243762082222966342&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000' style='pointer-events: auto;'></iframe>
+                `,
+                'alistair-burgess': `
+                    <h2>Alistair Burgess</h2>
+                    <img src="alistair-burgess-large.jpg" alt="Alistair Burgess" style="width:100%;max-width:400px;">
+                    <p>Alistair Burgess brings over 8 years of experience in private practice. He specializes in Strength Training, Movement Assessment, and Shoulder and Core Rehabilitation.</p>
+                    <h3>Book an Appointment with Alistair</h3>
+                    <iframe id='cliniko-63898223' src='https://total-body-physio.au1.cliniko.com/bookings?business_id=90633&practitioner_id=1274037115297990613&embedded=true' frameborder='0' scrolling='auto' width='100%' height='1000' style='pointer-events: auto;'></iframe>
+                `
+            };
+
+            // Set content based on id
+            if (servicesContent[id]) {
+                modalContent.innerHTML = servicesContent[id];
+            } else if (teamContent[id]) {
+                modalContent.innerHTML = teamContent[id];
+            }
+        }
+
+        // Close modal when clicking on <span> (x)
+        document.getElementsByClassName("close")[0].onclick = function() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                document.getElementById("myModal").style.display = "none";
+            }
+        }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWXduUtt8irQnVXbidd&callback=initMap"></script>
-    <script>
-        // JavaScript for handling service and team member clicks
-        // This would open new windows with more details and embedded appointment bookings
-        // The specific implementation would depend on your preferred method (modal, new page, etc.)
-    </script>
 </body>
 </html>
